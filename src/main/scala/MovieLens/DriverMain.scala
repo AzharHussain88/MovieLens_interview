@@ -59,7 +59,7 @@ object DriverMain {
 
     perfectdf.createOrReplaceTempView("movie")
 //    Top 10 Movie by Genre based on ratings
-     spark.sql("SELECT m.title, m.rating,DENSE_RANK() OVER( ORDER BY rating DESC) as movie_rank FROM movie AS m  limit 10").show(10)
+     spark.sql("select distinct(MovieID), Title, rating from movie order by rating desc limit 10").show(10)
 
     //Most Popular and Least Popular movies within a 2 year span (Any Year)
     spark.sql("select MovieID,genres, Title, Year, rating from movie WHERE rating = '5.0' AND rating = '1.0' BETWEEN Year = '1990' AND Year = '2000' limit 10").show(10)
